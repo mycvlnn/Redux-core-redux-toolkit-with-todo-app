@@ -1,7 +1,7 @@
 import { Col, Row, Input, Typography, Radio, Select, Tag } from "antd"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { changePrioritiesAction, changeStatusAction, searchTodoAction } from "../../redux/actions"
+import { changePrioritiesTodo, changeStatusTodo, searchTodo } from "./filtersSlice"
 
 const { Search } = Input
 
@@ -12,24 +12,24 @@ export default function Filters() {
   const [status, setStatus] = useState("All")
   const [priorities, setPriorities] = useState([])
 
+  const changeInputSearchHandler = (e) => {
+    const value = e.target.value
+    setEnteredSearch(value)
+
+    dispatch(searchTodo(value))
+  }
+
   const changeStatusHandler = (e) => {
     const value = e.target.value
     setStatus(value)
 
-    dispatch(changeStatusAction(value))
+    dispatch(changeStatusTodo(value))
   }
 
   const changePrioritiesHandler = (values) => {
     setPriorities(values)
 
-    dispatch(changePrioritiesAction(values))
-  }
-
-  const changeInputSearchHandler = (e) => {
-    const value = e.target.value
-    setEnteredSearch(value)
-
-    dispatch(searchTodoAction(value))
+    dispatch(changePrioritiesTodo(values))
   }
 
   return (

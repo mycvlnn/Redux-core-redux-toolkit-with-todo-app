@@ -2,10 +2,10 @@ import { Col, Row, Input, Button, Select, Tag } from "antd"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuidv4 } from "uuid"
-import { addTodoAction } from "../../redux/actions"
 
 import { todoListRemainingSelector } from "../../redux/selectors"
 import Todo from "../Todo"
+import { addTodo } from "./todoListSlice"
 
 export default function TodoList() {
   const dispatch = useDispatch()
@@ -36,9 +36,9 @@ export default function TodoList() {
     })
   }
 
-  const addTodo = () => {
+  const addTodoHandler = () => {
     dispatch(
-      addTodoAction({
+      addTodo({
         id: uuidv4(),
         name: eneteredTodo,
         priority: prioritySelected,
@@ -69,7 +69,7 @@ export default function TodoList() {
               <Tag color="gray">Low</Tag>
             </Select.Option>
           </Select>
-          <Button type="primary" onClick={addTodo}>
+          <Button type="primary" onClick={addTodoHandler}>
             Add
           </Button>
         </Input.Group>
